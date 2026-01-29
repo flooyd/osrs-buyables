@@ -19,7 +19,7 @@ function App() {
   }, [selectedSkill]);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-dark-bg">
+    <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
       <Header />
 
       <main className="container mx-auto px-4 py-8">
@@ -32,18 +32,18 @@ function App() {
 
           {data && (
             <div className="flex items-center gap-4">
-              <div className="text-sm text-gray-500 dark:text-dark-muted">
+              <div className="text-sm text-light-muted dark:text-dark-muted">
                 Last updated: {new Date(data.lastUpdated).toLocaleTimeString()}
               </div>
               <button
                 onClick={refetch}
                 disabled={loading}
-                className="p-2 rounded-lg transition-colors hover:bg-gray-200 dark:hover:bg-dark-surface disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-2 rounded-lg transition-colors hover:bg-light-hover dark:hover:bg-dark-hover disabled:opacity-50 disabled:cursor-not-allowed"
                 aria-label="Refresh data"
                 title="Refresh data"
               >
                 <RefreshCw
-                  className={`w-5 h-5 text-gray-600 dark:text-dark-muted ${
+                  className={`w-5 h-5 text-light-muted dark:text-dark-muted ${
                     loading ? 'animate-spin' : ''
                   }`}
                 />
@@ -56,7 +56,7 @@ function App() {
         {loading && !data && (
           <div className="flex flex-col items-center justify-center py-20">
             <Loader2 className="w-12 h-12 text-blue-500 animate-spin mb-4" />
-            <p className="text-gray-600 dark:text-dark-muted">
+            <p className="text-light-muted dark:text-dark-muted">
               Loading buyables data...
             </p>
           </div>
@@ -87,35 +87,53 @@ function App() {
         {!loading && !error && data && data.items && (
           <>
             <div className="mb-4">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-dark-text capitalize">
+              <h2 className="text-xl font-semibold text-light-text dark:text-dark-text capitalize">
                 {data.skill} Buyables
               </h2>
-              <p className="text-sm text-gray-600 dark:text-dark-muted mt-1">
+              <p className="text-sm text-light-muted dark:text-dark-muted mt-1">
                 {data.items.length} items • Sorted by best GP/XP value
               </p>
             </div>
 
-            <BuyablesTable data={data.items} />
+            <BuyablesTable data={data.items} skill={data.skill} />
 
             {/* Info Section */}
-            <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-              <h3 className="text-sm font-semibold text-blue-900 dark:text-blue-200 mb-2">
+            <div className="mt-6 p-4 bg-[#f5f1e8] dark:bg-blue-900/20 border border-light-border dark:border-blue-800 rounded-lg">
+              <h3 className="text-sm font-semibold text-light-text dark:text-blue-200 mb-2">
                 Understanding GP/XP
               </h3>
-              <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
-                <li>
-                  <strong className="text-green-600 dark:text-green-400">
-                    Negative GP/XP
-                  </strong>{' '}
-                  = You make profit while training!
-                </li>
-                <li>
-                  <strong className="text-red-600 dark:text-red-400">
-                    Positive GP/XP
-                  </strong>{' '}
-                  = It costs GP to train
-                </li>
-                <li>Lower values = better efficiency (less cost per XP)</li>
+              <ul className="text-sm text-light-muted dark:text-blue-300 space-y-1">
+                {selectedSkill === 'prayer' ? (
+                  <>
+                    <li>
+                      <strong className="text-red-600 dark:text-red-400">
+                        GP/XP
+                      </strong>{' '}
+                      shows the cost per experience point
+                    </li>
+                    <li>Lower values = more efficient training (less cost per XP)</li>
+                    <li>Items are consumed for XP, so there is no profit</li>
+                    <li>
+                      Chaos altar methods use 0.5x bones due to 50% save chance
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <strong className="text-green-600 dark:text-green-400">
+                        Negative GP/XP
+                      </strong>{' '}
+                      = You make profit while training!
+                    </li>
+                    <li>
+                      <strong className="text-red-600 dark:text-red-400">
+                        Positive GP/XP
+                      </strong>{' '}
+                      = It costs GP to train
+                    </li>
+                    <li>Lower values = better efficiency (less cost per XP)</li>
+                  </>
+                )}
                 <li>
                   Prices update every 5 minutes from OSRS Wiki real-time data
                 </li>
@@ -127,7 +145,7 @@ function App() {
         {/* Empty State */}
         {!loading && !error && data && data.items && data.items.length === 0 && (
           <div className="text-center py-20">
-            <p className="text-gray-600 dark:text-dark-muted">
+            <p className="text-light-muted dark:text-dark-muted">
               No buyables data available for this skill.
             </p>
           </div>

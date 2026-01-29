@@ -1,0 +1,100 @@
+{
+  "skill": "prayer",
+  "items": [
+    {
+      "itemId": 536,
+      "name": "Dragon bones (Gilded altar)",
+      "level": 1,
+      "xpGained": 252,
+      "materials": [
+        { "itemId": 536, "name": "Dragon bones", "quantity": 1 }
+      ]
+    },
+    {
+      "itemId": 536,
+      "name": "Dragon bones (Chaos altar)",
+      "level": 1,
+      "xpGained": 252,
+      "materials": [
+        { "itemId": 536, "name": "Dragon bones", "quantity": 0.5 }
+      ],
+      "note": "50% chance to save bone"
+    },
+    {
+      "itemId": 22124,
+      "name": "Superior dragon bones (Gilded altar)",
+      "level": 70,
+      "xpGained": 525,
+      "materials": [
+        { "itemId": 22124, "name": "Superior dragon bones", "quantity": 1 }
+      ]
+    },
+    {
+      "itemId": 22124,
+      "name": "Superior dragon bones (Chaos altar)",
+      "level": 70,
+      "xpGained": 525,
+      "materials": [
+        { "itemId": 22124, "name": "Superior dragon bones", "quantity": 0.5 }
+      ],
+      "note": "50% chance to save bone"
+    },
+    {
+      "itemId": 31729,
+      "name": "Frost dragon bones (Gilded altar)",
+      "level": 1,
+      "xpGained": 630,
+      "materials": [
+        { "itemId": 31729, "name": "Frost dragon bones", "quantity": 1 }
+      ]
+    },
+    {
+      "itemId": 31729,
+      "name": "Frost dragon bones (Chaos altar)",
+      "level": 1,
+      "xpGained": 630,
+      "materials": [
+        { "itemId": 31729, "name": "Frost dragon bones", "quantity": 0.5 }
+      ],
+      "note": "50% chance to save bone"
+    },
+    {
+      "itemId": 22783,
+      "name": "Hydra bones (Gilded altar)",
+      "level": 1,
+      "xpGained": 385,
+      "materials": [
+        { "itemId": 22783, "name": "Hydra bones", "quantity": 1 }
+      ]
+    },
+    {
+      "itemId": 22783,
+      "name": "Hydra bones (Chaos altar)",
+      "level": 1,
+      "xpGained": 385,
+      "materials": [
+        { "itemId": 22783, "name": "Hydra bones", "quantity": 0.5 }
+      ],
+      "note": "50% chance to save bone"
+    },
+    {
+      "itemId": 6729,
+      "name": "Dagannoth bones (Gilded altar)",
+      "level": 1,
+      "xpGained": 437.5,
+      "materials": [
+        { "itemId": 6729, "name": "Dagannoth bones", "quantity": 1 }
+      ]
+    },
+    {
+      "itemId": 6729,
+      "name": "Dagannoth bones (Chaos altar)",
+      "level": 1,
+      "xpGained": 437.5,
+      "materials": [
+        { "itemId": 6729, "name": "Dagannoth bones", "quantity": 0.5 }
+      ],
+      "note": "50% chance to save bone"
+    }
+  ]
+}

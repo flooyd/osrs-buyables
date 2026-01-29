@@ -48,7 +48,7 @@ export async function getBuyablesForSkill(skill) {
 
   // Calculate metrics for each item
   const calculatedItems = skillData.items.map(item => {
-    const calculation = calculateItemMetrics(item, prices);
+    const calculation = calculateItemMetrics(item, prices, normalizedSkill);
     return {
       ...item,
       ...calculation,
@@ -70,14 +70,17 @@ export async function getBuyablesForSkill(skill) {
  * Calculates price per XP and related metrics for an item
  * @param {Object} item - Item data with materials
  * @param {Object} prices - Price data from OSRS Wiki
+ * @param {string} skill - Skill name (for special calculations)
  * @returns {Object} Calculated metrics
  */
-function calculateItemMetrics(item, prices) {
+function calculateItemMetrics(item, prices, skill) {
   const itemIdStr = item.itemId.toString();
+  const isPrayerSkill = skill === 'prayer';
 
   // Get sell price (use 'high' for instant sell)
+  // For Prayer, items are consumed so sell price is 0
   const priceData = prices[itemIdStr];
-  const sellPrice = priceData?.high || 0;
+  const sellPrice = isPrayerSkill ? 0 : (priceData?.high || 0);
 
   // Calculate material cost (use 'low' for instant buy)
   let materialCost = 0;
@@ -97,8 +100,15 @@ function calculateItemMetrics(item, prices) {
   // Calculate net profit (positive = profit, negative = loss)
   const netProfit = sellPrice - materialCost;
 
-  // Calculate price per XP (negative = you profit while training!)
-  const pricePerXp = item.xpGained > 0 ? -netProfit / item.xpGained : 0;
+  // Calculate price per XP
+  // For Prayer: positive value (cost per XP) = materialCost / xpGained
+  // For other skills: negative = you profit while training (-(netProfit / xpGained))
+  let pricePerXp = 0;
+  if (item.xpGained > 0) {
+    pricePerXp = isPrayerSkill
+      ? materialCost / item.xpGained  // Prayer: positive cost per XP
+      : -netProfit / item.xpGained;   // Other skills: negative = profit
+  }
 
   // Determine if this is profitable
   const isProfit = netProfit > 0;
